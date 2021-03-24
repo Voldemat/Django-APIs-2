@@ -22,7 +22,7 @@ class TodoModelTest(TestCase):
 			'body':'Test Body',
 			
 		}
-		self.todo:Sequence[Todo] = Todo.objects.create(**self.data)
+		self.todo:Todo = Todo.objects.create(**self.data)
 	
 	def test_todo_content(self) -> None:
 		"""
@@ -30,15 +30,16 @@ class TodoModelTest(TestCase):
 			equall to fields in todo instance
 		"""
 		dictionary:dict = self.data
+		def _get_error_text(dictionary:dict, key:str, todo:Todo):
+			text = f'\n{key.capitalize()}: "{getattr(todo, key)}" != "{dictionary[key]}"'
+			return text
 
 		for key in dictionary:
 			# check that value of this attr equall to value in data dict
+			
 			self.assertEqual(
 				# Todo.key == dictionary[key]
 				getattr(self.todo, key), dictionary[key],
 				# custom error message
-				msg = colored(
-				f'\n{key.capitalize()}: "{getattr(self.todo,key)}" != "{dictionary[key]}"',
-				'red'
-				)
+				msg = colored(_get_error_text(dictionary, key, self.todo),'red')
 			)

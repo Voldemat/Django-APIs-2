@@ -10,27 +10,28 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+from typing import List, Dict, Union, Optional, Tuple
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR:Path = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY:Optional[str] = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG:Optional[str] = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS:List[str] = []
 
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS:List[str] = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,25 +42,26 @@ INSTALLED_APPS = [
     # 3rd party
     'corsheaders',
     'rest_framework',
+    # 'stubs',
 
     # apps
     'todos.apps.TodosConfig',
 ]
 
 # Django Rest Framework settings
-REST_FRAMEWORK = {
+REST_FRAMEWORK:Optional[dict] = {
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.AllowAny',
     ]
 }
 
 # Cors headers settings
-CORS_ORIGIN_WHITELIST = (
+CORS_ORIGIN_WHITELIST:Tuple[str,str] = (
     'http://localhost:3000',
     'http://localhost:8000',
 )
 
-MIDDLEWARE = [
+MIDDLEWARE:List[str] = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -70,9 +72,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'todo.urls'
+ROOT_URLCONF:str = 'todo.urls'
 
-TEMPLATES = [
+TEMPLATES:List[dict] = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
@@ -88,13 +90,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'todo.wsgi.application'
+WSGI_APPLICATION:str = 'todo.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+DATABASES:dict = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'django',
@@ -109,7 +111,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
+AUTH_PASSWORD_VALIDATORS:List[dict] = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
@@ -128,22 +130,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE:str = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE:str = 'UTC'
 
-USE_I18N = True
+USE_I18N:bool = True
 
-USE_L10N = True
+USE_L10N:bool = True
 
-USE_TZ = True
+USE_TZ:bool = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL:str = '/static/'
+STATIC_ROOT:str = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL:str = '/media/'
+MEDIA_ROOT:str = os.path.join(BASE_DIR, 'media')
